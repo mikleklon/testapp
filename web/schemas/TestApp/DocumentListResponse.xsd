@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Схема выходных данных (ответа) -->
 <xsd:schema elementFormDefault="qualified"
-	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-	xmlns:req="urn:ru:ilb:meta:TestApp:DocumentListRequest"
-	xmlns:obj="urn:ru:ilb:meta:TestApp:Document"
-	targetNamespace="urn:ru:ilb:meta:TestApp:DocumentListResponse"
-	xmlns="urn:ru:ilb:meta:TestApp:DocumentListResponse">
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			xmlns:req="urn:ru:ilb:meta:TestApp:DocumentListRequest"
+			xmlns:obj="urn:ru:ilb:meta:TestApp:Document"
+			targetNamespace="urn:ru:ilb:meta:TestApp:DocumentListResponse"
+			xmlns="urn:ru:ilb:meta:TestApp:DocumentListResponse">
 	<xsd:import namespace="urn:ru:ilb:meta:TestApp:DocumentListRequest" schemaLocation="./DocumentListRequest.xsd"/>
 	<xsd:import namespace="urn:ru:ilb:meta:TestApp:Document" schemaLocation="./Document.xsd"/>
 	<xsd:element name="DocumentListResponse">
@@ -20,4 +20,3 @@
 		</xsd:complexType>
 	</xsd:element>
 </xsd:schema>
-

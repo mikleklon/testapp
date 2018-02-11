@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-Схемы с описанием прикладных объектов.
-@version    $Id$
--->
 <xsd:schema elementFormDefault="qualified" xmlns="urn:ru:ilb:meta:TestApp:Document" targetNamespace="urn:ru:ilb:meta:TestApp:Document" xmlns:lft="urn:ru:meta:TestApp:LeafTypes" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <xsd:import namespace="urn:ru:meta:TestApp:LeafTypes" schemaLocation="./LeafTypes.xsd"/>
     <xsd:complexType name="DocumentType">

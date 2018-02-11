@@ -15,8 +15,14 @@ $xw = new XMLWriter();
 $xw->openMemory();
 $xw->setIndent(TRUE);
 $xw->startDocument("1.0", "UTF-8");
-$xw->writePi("xml-stylesheet", "type=\"text/xsl\" href=\"stylesheets/TestApp/DocumentList.xsl\"");
+//if($req->outputFormat =="pdf")
+//    $xw->writePi("xml-stylesheet", "type=\"text/xsl\" href=\"http://shop.u-energo.ru/lib/DocumentList.xsl\"");
+//else
+    $xw->writePi("xml-stylesheet", "type=\"text/xsl\" href=\"stylesheets/TestApp/DocumentList.xsl\"");
+//$xw->startElementNS(NULL, "DocumentListResponse", "urn:ru:ilb:meta:TestApp:DocumentListResponse");
 $xw->startElementNS(NULL, "DocumentListResponse", "urn:ru:ilb:meta:TestApp:DocumentListResponse");
+//$xw->startElementNS(NULL, "DocumentListRequest", "http://shop.u-energo.ru/lib/DocumentListRequest.xsd");
+//$xw->startElementNS(NULL, "Document", "http://shop.u-energo.ru/lib/Document.xsd");
 $req->toXmlWriter($xw);
 // Если есть входные данные, проведем вычисления и выдадим ответ
 if (!$hreq->isEmpty()) {
@@ -56,18 +62,35 @@ if($req->outputFormat =="html"){
     header("Content-Type: text/xsl");
     echo $xw->flush();
 }elseif($req->outputFormat =="pdf"){
+    $in = $xw->flush();
+    $xmldom = new DOMDocument();
+    $xmldom->loadXML($in);
+    $xsldom = new DomDocument();
+    $xsldom->load("stylesheets/TestApp/DocumentList2.xsl");
+    $proc = new XSLTProcessor();
+    $proc->importStyleSheet($xsldom);
+    $in = $proc->transformToXML($xmldom);
+    //echo $in;
+    //die();
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_TIMEOUT, 30);
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-    $url = "http://tomcat-bystrobank.rhcloud.com/fopservlet/fopservlet";
+   // $url = "http://tomcat-bystrobank.rhcloud.com/fopservlet/fopservlet";
+
+    $url = "http://p01.bystrobank.ru/fopservlet/fopservlet";
     curl_setopt($ch, CURLOPT_URL, $url);
     //specify mime-type of source data
     curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/xml"));
     //post contents - fo souce
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $xw->flush());
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $in);
     $res = curl_exec($ch);
     $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+   // echo $in;
+   // echo $res;
+
+    //die();
     //check http response code
     if ($code != 200) {
         throw new Exception($res . PHP_EOL . $url . " " . curl_error($ch), 450);

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Схема входных данных (запроса) -->
 <xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-	xmlns="urn:ru:ilb:meta:TestApp:DocumentListRequest"
-	targetNamespace="urn:ru:ilb:meta:TestApp:DocumentListRequest">
+			xmlns="urn:ru:ilb:meta:TestApp:DocumentListRequest"
+			targetNamespace="urn:ru:ilb:meta:TestApp:DocumentListRequest">
 	<xsd:element name="DocumentListRequest">
 		<xsd:complexType>
 			<xsd:annotation>
