@@ -10,7 +10,7 @@
  *
  *  @author dab@bystrobank.ru
  */
-function __autoload($c) {
+function test__autoload($c) {
     $f = str_replace("_", DIRECTORY_SEPARATOR, $c) . ".php";
     //проверяем сами - чтоб отловить место где произошла ошибка (стандартное сообщение неинформатвно)
     $r = null;
@@ -37,4 +37,4 @@ function __autoload($c) {
                 new FatalErrorException("Class '" . $c . "' not found in '" . $r . "'"));
     }
 }
-
+spl_autoload_register("test__autoload");

@@ -49,6 +49,23 @@
 					</label>
 				</div>
 				<div>
+					<label>
+						Наименование
+						<input size="10" type="text" name="name-0" value="{$req/req:name}"/>
+					</label>
+
+				</div>
+				<div>
+					<label>
+						Формат вывода
+						<select name="outputFormat-0">
+							<option value="html">html</option>
+							<option value="pdf">pdf</option>
+						</select>
+					</label>
+
+				</div>
+				<div>
 					<button  type="submit">Отправить</button>
 				</div>
 			</fieldset>
@@ -63,6 +80,8 @@
 				<tr>
 					<th>Дата</th>
 					<th>Наименование</th>
+					<th>Ключевые слова</th>
+					<th>Удалён</th>
 				</tr>
 				<xsl:for-each select="obj:Document">
 					<tr>
@@ -73,6 +92,12 @@
 							<a href="document.php?objectId-0={obj:objectId}">
 								<xsl:value-of select="obj:displayName"/>
 							</a>
+						</td>
+						<td>
+							<xsl:value-of select="obj:keywords"/>
+						</td>
+						<td>
+							<xsl:value-of select="obj:deleted"  />
 						</td>
 					</tr>
 				</xsl:for-each>
